@@ -1,0 +1,18 @@
+{
+  "name": "personal-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve public",
+    "build": "tailwindcss -c tailwind.config.js -o public/main.css src/main.css",
+    "build:watch": "tailwindcss -c tailwind.config.js -o public/main.css --watch src/main.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.0",
+    "tailwindcss": "^3.3.1"
+  }
+}
