@@ -4,6 +4,12 @@ resource_types:
     source:
       repository: ghcr.io/typositoire/concourse-helm3-resource
 
+  - name: registry-image
+    type: docker-image
+    source:
+      repository: concourse/registry-image-resource
+      tag: "dev"
+
 resources:
   - name: source-repo
     type: git

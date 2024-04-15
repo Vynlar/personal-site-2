@@ -119,7 +119,7 @@
       [:section {:class "space-y-8"}
        [:h2 {:class "font-serif font-bold text-4xl text-center"} "my work"]
        [:div {:class "max-w-md mx-auto"}
-        [:p {:class "font-sans"} "I am a product-focused UI engineer helping fast-moving startups build, adopt, and grow design systems. I have experience in the full lifecycle of a design system from building institutional support, to design and development, to documentation, support and maintenence."]]]
+        [:p {:class "font-sans"} "I am a product engineer helping fast-moving startups build, adopt, and grow design systems. I have experience in the full lifecycle of a design system from building institutional support, to design and development, to documentation, support and maintenence."]]]
       [:div {:class "h-12"}]
       [:div {:class "flex gap-2 justify-center"}
        (for [i (range 3)]
