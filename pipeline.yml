@@ -27,6 +27,7 @@ jobs:
   - name: build-and-push
     plan:
       - get: source-repo
+        trigger: true
 
       - task: build-task-image
         privileged: true
