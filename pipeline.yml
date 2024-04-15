@@ -1,0 +1,59 @@
+resource_types:
+  - name: helm
+    type: docker-image
+    source:
+      repository: ghcr.io/typositoire/concourse-helm3-resource
+
+resources:
+  - name: source-repo
+    type: git
+    source:
+      uri: https://github.com/Vynlar/personal-site-2.git
+      branch: master
+
+  - name: personal-website
+    type: registry-image
+    icon: docker
+    source:
+      repository: ((scaleway-secret-token.registry_url))/personal-website
+      username: ((scaleway-secret-token.username))
+      password: ((scaleway-secret-token.password))
+      tag_regex: .*
+      created_at_sort: true
+  - name: personal-website-helm
+    type: helm
+
+jobs:
+  - name: build-and-push
+    plan:
+      - get: source-repo
+
+      - task: build-task-image
+        privileged: true
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: concourse/oci-build-task
+          params:
+            CONTEXT: source-repo
+          inputs:
+            - name: source-repo
+          outputs:
+            - name: image
+          run:
+            path: build
+
+      - put: personal-website
+        params:
+          image: image/image.tar
+          additional_tags: source-repo/.git/ref
+
+      - put: personal-website-helm
+        params:
+          chart: source-repo/chart
+          kubeconfig: ((kubeconfig.config))
+          override_values:
+            - key: image.tag
+              path: source-repo/.git/ref
