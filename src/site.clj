@@ -110,7 +110,7 @@
         "adrian\n            aleixandre"]
        [:p
         {:class "font-sans"}
-        "UI engineer"]]
+        "UI product engineer"]]
       [:div
        {:class "grid grid-cols-4"}
        (for [i (range 8)]
