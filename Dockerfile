@@ -1,4 +1,4 @@
-FROM babashka/babashka:latest as bb
+FROM --platform=linux/amd64 babashka/babashka:latest as bb
 
 WORKDIR /opt/site
 
@@ -8,7 +8,7 @@ COPY public public/
 
 RUN bb src/site.clj
 
-FROM node:latest as n
+FROM --platform=linux/amd64 node:22 as n
 
 WORKDIR /opt/site
 
@@ -16,7 +16,6 @@ COPY package.json .
 COPY package-lock.json .
 
 RUN npm i
-
 
 COPY tailwind.config.js .
 COPY --from=bb /opt/site/src src/
