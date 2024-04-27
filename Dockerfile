@@ -24,6 +24,6 @@ COPY --from=bb /opt/site/public public/
 
 RUN npm run build
 
-FROM arm64v8/nginx
+FROM nginx
 
 COPY --from=n /opt/site/public /usr/share/nginx/html
