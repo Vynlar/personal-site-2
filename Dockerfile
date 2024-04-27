@@ -1,4 +1,4 @@
-FROM babashka/babashka:alpine as bb
+FROM babashka/babashka:latest as bb
 
 WORKDIR /opt/site
 
@@ -8,7 +8,7 @@ COPY public public/
 
 RUN bb src/site.clj
 
-FROM node:alpine3.17 as n
+FROM node:latest as n
 
 WORKDIR /opt/site
 
@@ -24,6 +24,6 @@ COPY --from=bb /opt/site/public public/
 
 RUN npm run build
 
-FROM arm64v8/nginx
+FROM nginx
 
 COPY --from=n /opt/site/public /usr/share/nginx/html
